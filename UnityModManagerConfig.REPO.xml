@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 	<GameInfo Name="REPO">
+	   <Folder>REPO</Folder>
+	   <ModsDirectory>Mods</ModsDirectory>
+	   <ModInfo>Info.json</ModInfo>
+	   <GameExe>REPO.exe</GameExe>
+       <!--I just poked around until I found some methods that worked. If there's some other mod with conflicting options, they probably know what they're doing and you should use their config-->
+	   <EntryPoint>[Assembly-CSharp.dll]MainMenuOpen.Awake:Before</EntryPoint>
+	   <UIStartingPoint>[Assembly-CSharp.dll]MainMenuOpen.Awake:Before</UIStartingPoint>
+	</GameInfo>
+</Config>
+

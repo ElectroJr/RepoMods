@@ -1,0 +1,7 @@
+﻿{
+  "Id": "ShowUpgrades",
+  "DisplayName": "ShowUpgrades",
+  "Author": "ElectroSR",
+  "Version": "1.0.0",
+  "EntryMethod": "ShowUpgrades.Main.Load"
+}
