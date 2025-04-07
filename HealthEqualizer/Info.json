@@ -1,0 +1,7 @@
+﻿{
+  "Id": "HealthEqualizer",
+  "DisplayName": "HealthEqualizer",
+  "Author": "ElectroSR",
+  "Version": "1.0.0",
+  "EntryMethod": "HealthEqualizer.Main.Load"
+}
