@@ -11,12 +11,12 @@ using UnityModManagerNet;
 namespace ShowUpgrades
 {
     [HarmonyPatch]
-    static class Main
+    public static class Main
     {
         private static UnityModManager.ModEntry _entry;
         private static bool _enabled;
 
-        static bool Load(UnityModManager.ModEntry modEntry)
+        public static bool Load(UnityModManager.ModEntry modEntry)
         {
             _entry = modEntry;
             _entry.OnToggle = OnToggle;
@@ -28,14 +28,14 @@ namespace ShowUpgrades
         private static bool OnToggle(UnityModManager.ModEntry arg1, bool value)
         {
             _enabled = value;
-            StatsUI.instance.Fetch();
+            StatsUI.instance?.Fetch();
             return true;
         }
 
-        public static void Log(string str) => _entry.Logger.Log(str);
+        private static void Log(string str) => _entry.Logger.Log(str);
 
         [HarmonyPatch(typeof(ItemUpgrade), "PlayerUpgrade")]
-        static void Postfix()
+        private static void Postfix()
         {
             if (!_enabled)
                 return;
@@ -45,7 +45,7 @@ namespace ShowUpgrades
         }
 
         [HarmonyPatch(typeof(StatsUI), nameof(StatsUI.Fetch))]
-        static bool Prefix(StatsUI __instance)
+        private static bool Prefix(StatsUI __instance)
         {
             if (!_enabled)
                 return true;

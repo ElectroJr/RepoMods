@@ -59,7 +59,7 @@ namespace HealthEqualizer
         }
 
         [HarmonyPatch(typeof(SemiFunc), nameof(SemiFunc.OnSceneSwitch))]
-        public static void Prefix(bool _gameOver, bool _leaveGame)
+        private static void Prefix(bool _gameOver, bool _leaveGame)
         {
             if (!_enabled || _gameOver || _leaveGame)
                 return;
