@@ -10,27 +10,36 @@ using UnityModManagerNet;
 
 namespace ShowUpgrades
 {
+    [HarmonyPatch]
     static class Main
     {
         private static UnityModManager.ModEntry _entry;
+        private static bool _enabled;
+
         static bool Load(UnityModManager.ModEntry modEntry)
         {
             _entry = modEntry;
+            _entry.OnToggle = OnToggle;
             var harmony = new Harmony(modEntry.Info.Id);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
-            modEntry.Logger.Log("Applying Harmony patches");
+            return true;
+        }
+
+        private static bool OnToggle(UnityModManager.ModEntry arg1, bool value)
+        {
+            _enabled = value;
+            StatsUI.instance.Fetch();
             return true;
         }
 
         public static void Log(string str) => _entry.Logger.Log(str);
-    }
 
-    [HarmonyPatch]
-    static class ShowUpgradePatch
-    {
         [HarmonyPatch(typeof(ItemUpgrade), "PlayerUpgrade")]
         static void Postfix()
         {
+            if (!_enabled)
+                return;
+
             // Ensure that the UI gets updated when any player gets an upgrade, not just the local player
             StatsUI.instance.Fetch();
         }
@@ -38,6 +47,9 @@ namespace ShowUpgrades
         [HarmonyPatch(typeof(StatsUI), nameof(StatsUI.Fetch))]
         static bool Prefix(StatsUI __instance)
         {
+            if (!_enabled)
+                return true;
+
             var upgradesHeader = Traverse.Create(__instance).Field("upgradesHeader").GetValue<TextMeshProUGUI>();
             var upgradeNames = Traverse.Create(__instance).Field("Text").GetValue<TextMeshProUGUI>();
             var upgradeNumbers = Traverse.Create(__instance).Field("textNumbers").GetValue<TextMeshProUGUI>();
@@ -116,7 +128,7 @@ namespace ShowUpgrades
                 }
             }
 
-            // Is any single entry for a given player greater than 9? If yes, we 
+            // Is any single entry for a given player greater than 9? If yes, we
             // may need to add leading zeros. We can be lazy and just check the totals.
             var needLeadingZero = total.Select(x => x > 9).ToArray();
 

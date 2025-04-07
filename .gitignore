@@ -1,2 +1,9 @@
 *.dll
 .idea
+RepoMods.sln.DotSettings.user
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea
