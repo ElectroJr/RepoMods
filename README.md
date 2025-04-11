@@ -1,6 +1,8 @@
 ## About
 
-This is a repository for any mods I make for [R.E.P.O](https://store.steampowered.com/app/3241660/REPO/), which currently consists of two different mods. The mods require [unity-mod-manager](github.com/newman55/unity-mod-manager) to load. I've created a mod manager [config file](UnityModManagerConfig.REPO.xml) that seems to work with the DoorstopProxy method. If you want to build the mods yourself, you'll need to update the paths in [Base.props](Base.props) to point to wherever your game is installed.
+This is a repository for any mods I make for [R.E.P.O](https://store.steampowered.com/app/3241660/REPO/), which currently consists of two different mods. The mods require [unity-mod-manager](github.com/newman55/unity-mod-manager) to load. I've created a mod manager [config file](UnityModManagerConfig.REPO.xml) that seems to work with the DoorstopProxy method. 
+
+You can download the latest release [here](https://github.com/ElectroJr/RepoMods/releases/latest). If you want to build the mods yourself, you'll need to update the paths in [Base.props](Base.props) to point to wherever your game is installed.
 
 ## ShowUpgrades
 
